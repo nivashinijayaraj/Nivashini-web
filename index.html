@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nivashini Jayaraj — AI/ML Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #111118;
+  --card: #16161f;
+  --border: rgba(255,255,255,0.07);
+  --accent: #7c6af7;
+  --accent2: #f76c8e;
+  --accent3: #6af7c8;
+  --text: #e8e8f0;
+  --muted: #8888aa;
+  --display: 'Playfair Display', serif;
+  --body: 'DM Sans', sans-serif;
+  --mono: 'Space Mono', monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* Grain overlay */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:999;opacity:.5
+}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 4rem;
+  background:rgba(10,10,15,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:all .3s
+}
+.nav-logo{
+  font-family:var(--display);font-size:1.3rem;font-weight:700;
+  color:var(--text);text-decoration:none;letter-spacing:-.5px
+}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  color:var(--muted);text-decoration:none;
+  font-size:.85rem;letter-spacing:.5px;text-transform:uppercase;font-weight:500;
+  transition:color .2s;font-family:var(--mono)
+}
+.nav-links a:hover{color:var(--accent)}
+.nav-theme{
+  background:none;border:1px solid var(--border);
+  color:var(--muted);cursor:pointer;
+  padding:.5rem .8rem;border-radius:6px;font-size:.9rem;
+  transition:all .2s
+}
+.nav-theme:hover{border-color:var(--accent);color:var(--accent)}
+.nav-hamburger{display:none;background:none;border:none;color:var(--text);font-size:1.4rem;cursor:pointer}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:0 4rem;padding-top:5rem;
+  position:relative;overflow:hidden
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 50%, rgba(124,106,247,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(106,247,200,0.06) 0%, transparent 60%)
+}
+.hero-grid{
+  position:absolute;inset:0;z-index:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+  background-size:60px 60px
+}
+.hero-content{position:relative;z-index:1;max-width:700px}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(124,106,247,.1);border:1px solid rgba(124,106,247,.3);
+  color:var(--accent);padding:.4rem 1rem;border-radius:100px;
+  font-size:.75rem;font-family:var(--mono);letter-spacing:1px;
+  margin-bottom:1.5rem;
+  animation:fadeUp .8s ease both
+}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-title{
+  font-family:var(--display);font-size:clamp(2.5rem,6vw,5rem);
+  font-weight:900;line-height:1.05;letter-spacing:-2px;
+  margin-bottom:1rem;
+  animation:fadeUp .8s .1s ease both
+}
+.hero-title .line2{color:var(--accent);font-style:italic}
+.hero-subtitle{
+  font-size:1.1rem;color:var(--muted);max-width:500px;
+  margin-bottom:2rem;line-height:1.7;
+  animation:fadeUp .8s .2s ease both
+}
+.hero-cta{
+  display:flex;gap:1rem;flex-wrap:wrap;
+  animation:fadeUp .8s .3s ease both
+}
+.btn{
+  padding:.8rem 1.8rem;border-radius:8px;
+  font-size:.9rem;font-weight:500;cursor:pointer;
+  text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;
+  transition:all .2s;letter-spacing:.3px
+}
+.btn-primary{
+  background:var(--accent);color:#fff;border:1px solid var(--accent)
+}
+.btn-primary:hover{background:transparent;color:var(--accent);transform:translateY(-2px)}
+.btn-outline{
+  background:transparent;color:var(--text);border:1px solid var(--border)
+}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.hero-socials{
+  display:flex;flex-direction:column;gap:1rem;
+  position:absolute;right:4rem;top:50%;transform:translateY(-50%);
+  z-index:1;
+  animation:fadeUp .8s .4s ease both
+}
+.hero-social-link{
+  width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);text-decoration:none;font-size:.9rem;
+  transition:all .2s
+}
+.hero-social-link:hover{border-color:var(--accent);color:var(--accent);transform:scale(1.1)}
+.hero-scroll{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  color:var(--muted);font-size:.75rem;font-family:var(--mono);
+  animation:fadeUp .8s .5s ease both
+}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollAnim 2s infinite}
+@keyframes scrollAnim{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* SECTIONS */
+section{padding:6rem 4rem}
+.section-label{
+  font-family:var(--mono);font-size:.75rem;letter-spacing:3px;
+  text-transform:uppercase;color:var(--accent);
+  margin-bottom:.8rem;display:block
+}
+.section-title{
+  font-family:var(--display);font-size:clamp(2rem,4vw,3rem);
+  font-weight:700;letter-spacing:-1px;margin-bottom:1rem
+}
+.section-line{
+  width:60px;height:3px;
+  background:linear-gradient(to right,var(--accent),var(--accent2));
+  border-radius:2px;margin-bottom:3rem
+}
+
+/* ABOUT */
+.about{background:var(--surface)}
+.about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:center;max-width:1100px}
+.about-img-wrap{position:relative}
+.about-photo{
+  width:100%;border-radius:16px;
+  border:1px solid var(--border);
+  background:var(--card);
+  display:flex;align-items:center;justify-content:center;
+  aspect-ratio:1;font-size:6rem;color:var(--accent);
+  overflow:hidden
+}
+.about-photo img{width:100%;height:100%;object-fit:cover}
+.about-badge{
+  position:absolute;bottom:-1rem;right:-1rem;
+  background:var(--accent);color:#fff;
+  padding:.8rem 1.2rem;border-radius:10px;
+  font-family:var(--mono);font-size:.75rem;font-weight:700;
+  box-shadow:0 4px 20px rgba(124,106,247,.4)
+}
+.about-text{color:var(--muted);line-height:1.8;font-size:1rem;margin-bottom:1.5rem}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.stat{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:1rem;text-align:center
+}
+.stat-num{font-family:var(--display);font-size:1.8rem;font-weight:700;color:var(--accent)}
+.stat-label{font-size:.75rem;color:var(--muted);font-family:var(--mono)}
+
+/* SKILLS */
+.skills-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:1rem;max-width:900px
+}
+.skill-chip{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:1rem;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  font-size:.85rem;color:var(--muted);font-family:var(--mono);
+  transition:all .25s;cursor:default;text-align:center
+}
+.skill-chip:hover{border-color:var(--accent);color:var(--text);transform:translateY(-3px);background:rgba(124,106,247,.05)}
+.skill-icon{font-size:1.6rem;color:var(--accent)}
+
+/* EDUCATION */
+.edu{background:var(--surface)}
+.timeline{position:relative;padding-left:2rem;max-width:700px}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:2.5rem}
+.tl-dot{
+  position:absolute;left:-2.4rem;top:.3rem;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 15px rgba(124,106,247,.5)
+}
+.tl-date{font-family:var(--mono);font-size:.75rem;color:var(--accent);margin-bottom:.3rem}
+.tl-title{font-family:var(--display);font-size:1.2rem;font-weight:700;margin-bottom:.2rem}
+.tl-sub{color:var(--muted);font-size:.9rem;margin-bottom:.3rem}
+.tl-grade{
+  display:inline-block;background:rgba(106,247,200,.1);
+  border:1px solid rgba(106,247,200,.3);color:var(--accent3);
+  font-family:var(--mono);font-size:.75rem;
+  padding:.2rem .7rem;border-radius:100px
+}
+
+/* EXPERIENCE */
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;max-width:1100px}
+.exp-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:1.8rem;
+  transition:all .25s;position:relative;overflow:hidden
+}
+.exp-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,var(--accent),var(--accent2));
+  transform:scaleX(0);transition:transform .3s;transform-origin:left
+}
+.exp-card:hover{border-color:rgba(124,106,247,.3);transform:translateY(-4px)}
+.exp-card:hover::before{transform:scaleX(1)}
+.exp-company{font-family:var(--mono);font-size:.75rem;color:var(--accent);margin-bottom:.4rem}
+.exp-role{font-family:var(--display);font-size:1.1rem;font-weight:700;margin-bottom:.3rem}
+.exp-date{font-size:.8rem;color:var(--muted);margin-bottom:.8rem}
+.exp-desc{font-size:.88rem;color:var(--muted);line-height:1.7}
+
+/* PROJECTS */
+.projects{background:var(--surface)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;max-width:1100px}
+.project-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;
+  transition:all .3s;group:hover
+}
+.project-card:hover{border-color:rgba(124,106,247,.4);transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.project-img{
+  width:100%;height:180px;object-fit:cover;
+  background:linear-gradient(135deg,rgba(124,106,247,.2),rgba(247,108,142,.2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:3rem;color:var(--accent)
+}
+.project-img img{width:100%;height:100%;object-fit:cover}
+.project-body{padding:1.5rem}
+.project-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.8rem}
+.project-tag{
+  background:rgba(124,106,247,.1);border:1px solid rgba(124,106,247,.2);
+  color:var(--accent);font-size:.7rem;font-family:var(--mono);
+  padding:.2rem .6rem;border-radius:100px
+}
+.project-title{font-family:var(--display);font-size:1rem;font-weight:700;margin-bottom:.5rem;line-height:1.3}
+.project-desc{font-size:.85rem;color:var(--muted);line-height:1.6;margin-bottom:1rem}
+.project-link{
+  display:inline-flex;align-items:center;gap:.4rem;
+  color:var(--accent);font-size:.8rem;font-family:var(--mono);
+  text-decoration:none;
+  transition:gap .2s
+}
+.project-link:hover{gap:.7rem}
+
+/* ACHIEVEMENTS */
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;max-width:1100px}
+.ach-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:1.8rem;
+  transition:all .25s
+}
+.ach-card:hover{border-color:rgba(247,108,142,.3);transform:translateY(-3px)}
+.ach-icon{font-size:2rem;margin-bottom:.8rem}
+.ach-title{font-weight:600;margin-bottom:.3rem}
+.ach-sub{font-size:.85rem;color:var(--accent2);font-family:var(--mono);margin-bottom:.5rem}
+.ach-desc{font-size:.85rem;color:var(--muted);line-height:1.6}
+
+/* CONTACT */
+.contact{background:var(--surface)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;max-width:1000px}
+.contact-info{display:flex;flex-direction:column;gap:1.5rem}
+.contact-card{
+  display:flex;align-items:center;gap:1rem;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:1.2rem 1.5rem;
+  text-decoration:none;color:var(--text);
+  transition:all .2s
+}
+.contact-card:hover{border-color:var(--accent);transform:translateX(5px)}
+.contact-card-icon{
+  width:40px;height:40px;border-radius:8px;
+  background:rgba(124,106,247,.1);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--accent);font-size:1.1rem;flex-shrink:0
+}
+.contact-card-label{font-size:.75rem;color:var(--muted);font-family:var(--mono)}
+.contact-card-value{font-size:.9rem;font-weight:500}
+.contact-cta{
+  background:linear-gradient(135deg,rgba(124,106,247,.15),rgba(247,108,142,.1));
+  border:1px solid rgba(124,106,247,.2);
+  border-radius:14px;padding:2.5rem;
+}
+.contact-cta h3{font-family:var(--display);font-size:1.8rem;font-weight:700;margin-bottom:.8rem}
+.contact-cta p{color:var(--muted);margin-bottom:1.5rem;line-height:1.7}
+
+/* FOOTER */
+footer{
+  padding:2rem 4rem;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem
+}
+.footer-logo{font-family:var(--display);font-size:1.1rem;font-weight:700}
+.footer-logo span{color:var(--accent)}
+.footer-copy{font-size:.8rem;color:var(--muted);font-family:var(--mono)}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .2s}
+.footer-links a:hover{color:var(--accent)}
+
+/* REVEAL ANIMATION */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* MOBILE NAV */
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .nav-hamburger{display:block}
+  .nav-links.open{
+    display:flex;flex-direction:column;
+    position:fixed;inset:0;top:60px;
+    background:rgba(10,10,15,.97);
+    padding:2rem;gap:1.5rem;z-index:99
+  }
+  .hero{padding:0 1.5rem;padding-top:5rem}
+  .hero-socials{display:none}
+  section{padding:4rem 1.5rem}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .contact-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;text-align:center;padding:2rem 1.5rem}
+}
+
+/* LIGHT THEME */
+body.light{
+  --bg:#f5f5fa;--surface:#ededf5;--card:#fff;
+  --border:rgba(0,0,0,.08);--text:#1a1a2e;--muted:#666688
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#home" class="nav-logo">Nivashini <span>J</span></a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Credentials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:.8rem;align-items:center">
+    <button class="nav-theme" id="themeBtn"><i class="fa-regular fa-sun"></i></button>
+    <button class="nav-hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span>Available for opportunities</span>
+    </div>
+    <h1 class="hero-title">
+      Nivashini<br>
+      <span class="line2">Jayaraj</span>
+    </h1>
+    <p class="hero-subtitle">
+      Aspiring AI/ML Engineer · Associate Data Analyst at VDart · Passionate about Python, Machine Learning, Deep Learning, GenAI &amp; Data Analytics. Open to Data Science and AI/ML roles — eager to keep learning and building impactful solutions.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-rocket"></i> View Projects</a>
+      <a href="https://github.com/nivashinijayaraj/Resume/blob/main/RESUME.pdf" target="_blank" class="btn btn-outline"><i class="fa-solid fa-file-arrow-down"></i> Download CV</a>
+    </div>
+  </div>
+  <div class="hero-socials">
+    <a href="https://www.linkedin.com/in/nivashini-j/" target="_blank" class="hero-social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+    <a href="https://github.com/nivashinijayaraj" target="_blank" class="hero-social-link"><i class="fa-brands fa-github"></i></a>
+    <a href="mailto:nivashini.j123@gmail.com" class="hero-social-link"><i class="fa-regular fa-envelope"></i></a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="reveal">
+    <span class="section-label">01 — About</span>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="section-line"></div>
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <div class="about-photo">
+          <img src="Assests/Photo.jpg" alt="Nivashini" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='Assets/Icons/aboutimg.png'"/>
+        </div>
+        <div class="about-badge">Associate Data Analyst @ VDart</div>
+      </div>
+      <div>
+        <p class="about-text">
+          Enthusiastic and detail-oriented Data Analyst with hands-on experience in Python, SQL, Machine Learning, LLM, and RAG. Currently working at VDart Inc., Trichy — analyzing business performance, building Power BI dashboards, and automating data pipelines.
+        </p>
+        <p class="about-text">
+          Eager to grow into Data Science and AI/ML roles. Passionate about building predictive systems, GenAI applications, and turning complex data into decisions that drive real impact. Recognized for academic excellence, leadership, and continuous learning.
+        </p>
+        <div class="about-stats">
+          <div class="stat"><div class="stat-num">9.16</div><div class="stat-label">M.Sc. CGPA</div></div>
+          <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Projects</div></div>
+          <div class="stat"><div class="stat-num">4</div><div class="stat-label">Internships</div></div>
+        </div>
+        <a href="https://github.com/nivashinijayaraj/Resume/blob/main/RESUME.pdf" target="_blank" class="btn btn-primary"><i class="fa-solid fa-file-arrow-down"></i> Download Resume</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <span class="section-label">02 — Skills</span>
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="section-line"></div>
+    <div class="skills-grid">
+      <div class="skill-chip"><span class="skill-icon">🤖</span>Machine Learning</div>
+      <div class="skill-chip"><span class="skill-icon">🧠</span>Deep Learning</div>
+      <div class="skill-chip"><span class="skill-icon">✨</span>Gen AI / LLM</div>
+      <div class="skill-chip"><span class="skill-icon">🔗</span>RAG</div>
+      <div class="skill-chip"><span class="skill-icon">💬</span>NLP</div>
+      <div class="skill-chip"><span class="skill-icon">🐍</span>Python</div>
+      <div class="skill-chip"><span class="skill-icon">🗄️</span>SQL</div>
+      <div class="skill-chip"><span class="skill-icon">🍃</span>MongoDB</div>
+      <div class="skill-chip"><span class="skill-icon">📊</span>Power BI</div>
+      <div class="skill-chip"><span class="skill-icon">📈</span>Tableau</div>
+      <div class="skill-chip"><span class="skill-icon">📋</span>Advanced Excel</div>
+      <div class="skill-chip"><span class="skill-icon">☁️</span>Microsoft Azure</div>
+      <div class="skill-chip"><span class="skill-icon">🐘</span>Hadoop</div>
+      <div class="skill-chip"><span class="skill-icon">🔢</span>Pandas / NumPy</div>
+      <div class="skill-chip"><span class="skill-icon">⚙️</span>Scikit-learn</div>
+      <div class="skill-chip"><span class="skill-icon">🔥</span>TensorFlow</div>
+      <div class="skill-chip"><span class="skill-icon">🕸️</span>Neural Networks</div>
+      <div class="skill-chip"><span class="skill-icon">🔁</span>RNN / Autoencoder</div>
+      <div class="skill-chip"><span class="skill-icon">🎨</span>GAN / VAE</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="edu" id="education">
+  <div class="reveal">
+    <span class="section-label">03 — Education</span>
+    <h2 class="section-title">My Journey</h2>
+    <div class="section-line"></div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--accent3);box-shadow:0 0 14px rgba(94,245,192,.6)"></div>
+        <div class="tl-date" style="color:var(--accent3)">SEP 2025 — PRESENT</div>
+        <div class="tl-title">Associate Data Analyst</div>
+        <div class="tl-sub">VDart Inc., Trichy</div>
+        <span class="tl-grade" style="background:rgba(94,245,192,.15);border-color:rgba(94,245,192,.3);color:var(--accent3)">● Currently Working</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">JUN 2024 — AUG 2024 · 3 months</div>
+        <div class="tl-title">AI Developer Intern</div>
+        <div class="tl-sub">Trio Devs, Trichy — LLM & RAG</div>
+        <span class="tl-grade">Internship</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">APR 2024 — MAY 2024 · 2 months</div>
+        <div class="tl-title">Machine Learning Intern</div>
+        <div class="tl-sub">DLK Technologies, Chennai — Supervised Learning</div>
+        <span class="tl-grade">Internship</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">JUN 2023 — MAR 2025</div>
+        <div class="tl-title">Master of Science — Data Science</div>
+        <div class="tl-sub">Bishop Heber College (Autonomous), Tiruchirappalli</div>
+        <span class="tl-grade">CGPA: 9.16</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">JUN 2020 — MAR 2023</div>
+        <div class="tl-title">Bachelor of Science — Mathematics</div>
+        <div class="tl-sub">Bharathiyar Arts and Science College, Salem</div>
+        <span class="tl-grade">CGPA: 9.0</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="reveal">
+    <span class="section-label">04 — Experience</span>
+    <h2 class="section-title">Work Experience</h2>
+    <div class="section-line"></div>
+    <div class="exp-grid">
+      <div class="exp-card" style="border-color:rgba(124,106,247,.25)">
+        <div class="exp-company" style="display:flex;align-items:center;gap:.5rem">VDart Inc. <span style="background:rgba(94,245,192,.15);border:1px solid rgba(94,245,192,.3);color:#5ef5c0;padding:.1rem .5rem;border-radius:100px;font-size:.65rem">● Current</span></div>
+        <div class="exp-role">Associate Data Analyst</div>
+        <div class="exp-date" style="font-size:.78rem;color:var(--muted);margin-bottom:.9rem;font-family:var(--mono)">Sep 2025 — Present · Trichy</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem">
+          <li style="font-size:.84rem;color:var(--muted);line-height:1.6;padding-left:1rem;position:relative"><span style="position:absolute;left:0;color:var(--accent)">▸</span>Analyzing employee performance and monthly/yearly VDart business movements to identify improvement areas across geographies.</li>
+          <li style="font-size:.84rem;color:var(--muted);line-height:1.6;padding-left:1rem;position:relative"><span style="position:absolute;left:0;color:var(--accent)">▸</span>Migrated all data management from Excel to SQL — improved data retrieval speed by <strong style="color:var(--accent3)">35%</strong> and ensured better consistency.</li>
+          <li style="font-size:.84rem;color:var(--muted);line-height:1.6;padding-left:1rem;position:relative"><span style="position:absolute;left:0;color:var(--accent)">▸</span>Automated all data cleaning processes using Python, reducing time consumption and errors.</li>
+          <li style="font-size:.84rem;color:var(--muted);line-height:1.6;padding-left:1rem;position:relative"><span style="position:absolute;left:0;color:var(--accent)">▸</span>Designed interactive Power BI dashboards visualizing KPIs for faster, data-driven decisions across business units.</li>
+        </ul>
+      </div>
+      <div class="exp-card">
+        <div class="exp-company">DLK Technologies · Chennai</div>
+        <div class="exp-role">Machine Learning Intern</div>
+        <div class="exp-date" style="font-size:.78rem;color:var(--muted);margin-bottom:.9rem;font-family:var(--mono)">Apr 2024 — May 2024</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem">
+          <li style="font-size:.84rem;color:var(--muted);line-height:1.6;padding-left:1rem;position:relative"><span style="position:absolute;left:0;color:var(--accent)">▸</span>Built a predictive model to classify suitable life insurance plans (Traditional or Term) using supervised learning.</li>
+          <li style="font-size:.84rem;color:var(--muted);line-height:1.6;padding-left:1rem;position:relative"><span style="position:absolute;left:0;color:var(--accent)">▸</span>Improved prediction accuracy by <strong style="color:var(--accent3)">10%</strong> through feature engineering and model optimization.</li>
+        </ul>
+      </div>
+      <div class="exp-card">
+        <div class="exp-company">Trio Devs · Trichy</div>
+        <div class="exp-role">AI Developer Intern</div>
+        <div class="exp-date" style="font-size:.78rem;color:var(--muted);margin-bottom:.9rem;font-family:var(--mono)">May 2024 — Aug 2024</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.5rem">
+          <li style="font-size:.84rem;color:var(--muted);line-height:1.6;padding-left:1rem;position:relative"><span style="position:absolute;left:0;color:var(--accent)">▸</span>Developed a chatbot using Meta LLaMA and RAG for context-aware, natural language responses.</li>
+          <li style="font-size:.84rem;color:var(--muted);line-height:1.6;padding-left:1rem;position:relative"><span style="position:absolute;left:0;color:var(--accent)">▸</span>Enhanced response accuracy and system reliability through RAG-based contextual retrieval and optimization.</li>
+        </ul>
+      </div>
+      <div class="exp-card">
+        <div class="exp-company">Code Bind Technology</div>
+        <div class="exp-role">Web Developer Intern</div>
+        <div class="exp-date">Jan 2024</div>
+        <div class="exp-desc">Built a College Management System — a platform for student, faculty, and course management.</div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-company">DLK Technologies</div>
+        <div class="exp-role">Web Developer Intern</div>
+        <div class="exp-date">Jun 2024 — Jul 2024</div>
+        <div class="exp-desc">Built a perfume discovery platform with in-depth profiles, popularity rankings, and direct purchase links for brand engagement.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="reveal">
+    <span class="section-label">05 — Projects</span>
+    <h2 class="section-title">My Work</h2>
+    <div class="section-line"></div>
+    <div class="projects-grid">
+
+      <!-- 1. VDart Business Dashboard (Sep 2025–Present) -->
+      <div class="project-card" style="border-color:rgba(94,245,192,.2)">
+        <div class="project-img" style="display:flex;align-items:center;justify-content:center;font-size:3rem;height:170px;background:linear-gradient(135deg,rgba(94,245,192,.15),rgba(124,106,247,.12))">📊</div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag" style="border-color:rgba(94,245,192,.3);color:var(--accent3);background:rgba(94,245,192,.08)">Power BI</span><span class="project-tag">Python</span><span class="project-tag">SQL</span></div>
+          <div class="project-title">VDart Weekly Business Dashboard</div>
+          <div class="project-desc">Interactive Power BI dashboard tracking weekly business flow — closures, submissions, client activity, BU-wise and team-wise performance. Built end-to-end data pipeline with Python for cleaning and SQL for data management.</div>
+          <div style="font-size:.75rem;color:var(--accent3);font-family:var(--mono);margin-bottom:.7rem">Sep 2025 — Present</div>
+          <span class="project-link" style="cursor:default;opacity:.6">Internal Project · VDart Inc.</span>
+        </div>
+      </div>
+
+      <!-- 2. Fake Job Detection (Jul 2024–Apr 2025) -->
+      <div class="project-card">
+        <div class="project-img">
+          <img src="Assets/project/fake and real.jpg" alt="Fake Job Detection" onerror="this.parentElement.style.fontSize='3rem';this.parentElement.innerHTML='🔍'"/>
+        </div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">ML</span><span class="project-tag">Deep Learning</span><span class="project-tag">API</span></div>
+          <div class="project-title">Fake Job Scam Detection & Verification System</div>
+          <div class="project-desc">Random Forest, XGBoost & BiLSTM ensemble achieving <strong style="color:var(--accent3)">95% accuracy</strong>. Integrated Google Search API to verify company legitimacy and hiring status in real time.</div>
+          <div style="font-size:.75rem;color:var(--muted);font-family:var(--mono);margin-bottom:.7rem">Jul 2024 — Apr 2025</div>
+          <a href="https://github.com/nivashinijayaraj/Fake-and-real-job-posting-detection" target="_blank" class="project-link">View on GitHub <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- 3. Life Insurance (Apr–May 2024) -->
+      <div class="project-card">
+        <div class="project-img">
+          <img src="Assets/project/life insurance.jpg" alt="Life Insurance" onerror="this.parentElement.style.fontSize='3rem';this.parentElement.innerHTML='💊'"/>
+        </div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Random Forest</span><span class="project-tag">ML</span></div>
+          <div class="project-title">Life Insurance Plan Predictor</div>
+          <div class="project-desc">Predictive model classifying Term vs Traditional insurance plans from BMI, affordability, and occupation risk. Improved accuracy by <strong style="color:var(--accent3)">10%</strong> via feature engineering and hyperparameter tuning.</div>
+          <div style="font-size:.75rem;color:var(--muted);font-family:var(--mono);margin-bottom:.7rem">Apr — May 2024</div>
+          <a href="https://github.com/nivashinijayaraj/Life-Insurance" target="_blank" class="project-link">View on GitHub <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- 4. Accenture (Sep 2024) -->
+      <div class="project-card">
+        <div class="project-img">
+          <img src="Assets/project/accenture.png" alt="Accenture" onerror="this.parentElement.style.fontSize='3rem';this.parentElement.innerHTML='📈'"/>
+        </div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Analytics</span><span class="project-tag">Visualization</span></div>
+          <div class="project-title">Accenture NA Data Analytics Simulation</div>
+          <div class="project-desc">Extracted actionable trends for "Social Buzz" — crafted compelling narratives and visualizations for stakeholders via the Forage job simulation.</div>
+          <div style="font-size:.75rem;color:var(--muted);font-family:var(--mono);margin-bottom:.7rem">Sep 2024</div>
+          <a href="https://github.com/nivashinijayaraj/Accenture-North-America-Data-Analytics-and-Visualization-Job-Simulation-on-Forage---September-2024" target="_blank" class="project-link">View on GitHub <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- 5. IBM HR Analytics (Jan 2024) -->
+      <div class="project-card">
+        <div class="project-img" style="display:flex;align-items:center;justify-content:center;font-size:3rem;height:170px;background:linear-gradient(135deg,rgba(94,245,192,.12),rgba(124,106,247,.1))">🏢</div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Tableau</span><span class="project-tag">HR Analytics</span></div>
+          <div class="project-title">Employee Data Analytics — IBM HR</div>
+          <div class="project-desc">Analyzed IBM HR data to identify trends in attrition, job satisfaction, and department performance. Built Tableau dashboards to help management reduce attrition risk.</div>
+          <div style="font-size:.75rem;color:var(--muted);font-family:var(--mono);margin-bottom:.7rem">Jan 2024</div>
+          <span class="project-link" style="opacity:.6;cursor:default">Tableau Project</span>
+        </div>
+      </div>
+
+      <!-- 6. Bank Analysis (Jan 2024) -->
+      <div class="project-card">
+        <div class="project-img">
+          <img src="Assets/project/bank data analysis.jpg" alt="Bank Analysis" onerror="this.parentElement.style.fontSize='3rem';this.parentElement.innerHTML='🏦'"/>
+        </div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Tableau</span><span class="project-tag">Analytics</span></div>
+          <div class="project-title">Comprehensive Bank Financial Analysis</div>
+          <div class="project-desc">Tableau analysis of leading banks' financial performance using KPIs, market trends, and financial statements to inform strategic decision-making.</div>
+          <div style="font-size:.75rem;color:var(--muted);font-family:var(--mono);margin-bottom:.7rem">Jan 2024</div>
+          <a href="https://github.com/nivashinijayaraj/Comprehensive-analysis-of-financial-performance-Insights-of-leading-banks." target="_blank" class="project-link">View on GitHub <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- 7. Expense Tracker (2024) -->
+      <div class="project-card">
+        <div class="project-img">
+          <img src="Assets/project/expense tracker.jpg" alt="Expense Tracker" onerror="this.parentElement.style.fontSize='3rem';this.parentElement.innerHTML='💰'"/>
+        </div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">tkinter</span></div>
+          <div class="project-title">GUI Expense Tracker</div>
+          <div class="project-desc">Desktop app to monitor spending, categorize expenses, and get budgeting tips using the tkinter library.</div>
+          <a href="https://github.com/nivashinijayaraj/Expense-Tracker-mini-project" target="_blank" class="project-link">View on GitHub <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- 8. College Management (Jan 2024) -->
+      <div class="project-card">
+        <div class="project-img">
+          <img src="Assets/project/web development.jpg" alt="College Management" onerror="this.parentElement.style.fontSize='3rem';this.parentElement.innerHTML='🏫'"/>
+        </div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Web Dev</span><span class="project-tag">HTML/CSS</span></div>
+          <div class="project-title">College Management System</div>
+          <div class="project-desc">A platform for student, faculty, and course management with clean UI and full CRUD operations.</div>
+          <div style="font-size:.75rem;color:var(--muted);font-family:var(--mono);margin-bottom:.7rem">Jan 2024</div>
+          <a href="https://github.com/nivashinijayaraj/Web-Development-project" target="_blank" class="project-link">View on GitHub <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS & EXTRA-CURRICULAR -->
+<section id="achievements">
+  <div class="reveal">
+    <span class="section-label">06 — Achievements</span>
+    <h2 class="section-title">Awards & Activities</h2>
+    <div class="section-line"></div>
+    <div class="ach-grid">
+      <div class="ach-card" style="border-color:rgba(247,194,94,.25)">
+        <div class="ach-icon">🥈</div>
+        <div class="ach-title">Academic Proficiency — 2nd Place</div>
+        <div class="ach-sub">M.Sc Data Science — Bishop Heber College</div>
+        <div class="ach-desc">Awarded 2nd place for academic proficiency in M.Sc Data Science programme.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">🥈</div>
+        <div class="ach-title">Data Analytics Competition</div>
+        <div class="ach-sub">2nd Place — Dexter Fest'24, Bishop Heber College</div>
+        <div class="ach-desc">Applied data analysis techniques to real-world problems at the national-level tech fest. Dec 2024.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">🥇</div>
+        <div class="ach-title">Academic Proficiency — 1st Place</div>
+        <div class="ach-sub">II & III B.Sc Mathematics, 2022–2023</div>
+        <div class="ach-desc">Awarded for topping the class in Academic Proficiency during second and third year of undergraduate studies.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">🏅</div>
+        <div class="ach-title">Academic Proficiency — 2nd Place</div>
+        <div class="ach-sub">I B.Sc Mathematics, 2020</div>
+        <div class="ach-desc">Awarded 2nd place for academic excellence in the first year of B.Sc Mathematics.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">🎤</div>
+        <div class="ach-title">Technical Event Lead</div>
+        <div class="ach-sub">National Level Technical Symposium — Feb 2025</div>
+        <div class="ach-desc">Led technical events at the National Level Technical Symposium at Bishop Heber College.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">🎓</div>
+        <div class="ach-title">Student Mentor — ML Sessions</div>
+        <div class="ach-sub">Govt. Hr. Sect. School — Dec 2025</div>
+        <div class="ach-desc">Conducted Machine Learning awareness sessions for government school students, inspiring the next generation of tech talent.</div>
+      </div>
+      <div class="ach-card">
+        <div class="ach-icon">🇮🇳</div>
+        <div class="ach-title">National Integration Camp</div>
+        <div class="ach-sub">NSS — Odisha, representing Tamil Nadu</div>
+        <div class="ach-desc">Promoted national unity and cultural exchange through community service projects across India.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section style="background:var(--surface)" id="certifications">
+  <div class="reveal">
+    <span class="section-label">07 — Certifications</span>
+    <h2 class="section-title">Credentials</h2>
+    <div class="section-line"></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;max-width:1100px">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:all .2s" onmouseover="this.style.borderColor='rgba(247,194,94,.3)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="width:36px;height:36px;border-radius:8px;background:rgba(247,194,94,.12);display:flex;align-items:center;justify-content:center;color:#f7c25e;font-size:1rem;flex-shrink:0"><i class="fa-solid fa-certificate"></i></div>
+        <div><div style="font-size:.85rem;font-weight:500;margin-bottom:.2rem;line-height:1.3">Machine Learning with Python</div><div style="font-size:.75rem;color:var(--muted);font-family:var(--mono)">Coursera · Dec 2023</div></div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:all .2s" onmouseover="this.style.borderColor='rgba(247,194,94,.3)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="width:36px;height:36px;border-radius:8px;background:rgba(94,245,192,.12);display:flex;align-items:center;justify-content:center;color:#5ef5c0;font-size:1rem;flex-shrink:0"><i class="fa-brands fa-microsoft"></i></div>
+        <div><div style="font-size:.85rem;font-weight:500;margin-bottom:.2rem;line-height:1.3">Azure Fundamentals (AZ-900)</div><div style="font-size:.75rem;color:var(--muted);font-family:var(--mono)">Microsoft · Score: 910/1000 · Jun–Sep 2024</div></div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:all .2s" onmouseover="this.style.borderColor='rgba(247,194,94,.3)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="width:36px;height:36px;border-radius:8px;background:rgba(124,106,247,.12);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:1rem;flex-shrink:0"><i class="fa-solid fa-chart-bar"></i></div>
+        <div><div style="font-size:.85rem;font-weight:500;margin-bottom:.2rem;line-height:1.3">Data Analytics & Visualization — Accenture</div><div style="font-size:.75rem;color:var(--muted);font-family:var(--mono)">Forage · Sep 2024</div></div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:all .2s" onmouseover="this.style.borderColor='rgba(247,194,94,.3)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="width:36px;height:36px;border-radius:8px;background:rgba(247,108,142,.12);display:flex;align-items:center;justify-content:center;color:var(--accent2);font-size:1rem;flex-shrink:0"><i class="fa-solid fa-database"></i></div>
+        <div><div style="font-size:.85rem;font-weight:500;margin-bottom:.2rem;line-height:1.3">Big Data Analytics with Hadoop</div><div style="font-size:.75rem;color:var(--muted);font-family:var(--mono)">LinkedIn Learning · Apr 2024</div></div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:all .2s" onmouseover="this.style.borderColor='rgba(247,194,94,.3)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="width:36px;height:36px;border-radius:8px;background:rgba(247,194,94,.12);display:flex;align-items:center;justify-content:center;color:#f7c25e;font-size:1rem;flex-shrink:0"><i class="fa-solid fa-certificate"></i></div>
+        <div><div style="font-size:.85rem;font-weight:500;margin-bottom:.2rem;line-height:1.3">What is Data Science</div><div style="font-size:.75rem;color:var(--muted);font-family:var(--mono)">IBM Coursera · Oct 2023</div></div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:all .2s" onmouseover="this.style.borderColor='rgba(247,194,94,.3)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="width:36px;height:36px;border-radius:8px;background:rgba(94,245,192,.12);display:flex;align-items:center;justify-content:center;color:#5ef5c0;font-size:1rem;flex-shrink:0"><i class="fa-solid fa-square-root-variable"></i></div>
+        <div><div style="font-size:.85rem;font-weight:500;margin-bottom:.2rem;line-height:1.3">Introduction to Statistics</div><div style="font-size:.75rem;color:var(--muted);font-family:var(--mono)">Swayam NPTEL · Jul–Sep 2023</div></div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:all .2s" onmouseover="this.style.borderColor='rgba(247,194,94,.3)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="width:36px;height:36px;border-radius:8px;background:rgba(124,106,247,.12);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:1rem;flex-shrink:0"><i class="fa-solid fa-chart-pie"></i></div>
+        <div><div style="font-size:.85rem;font-weight:500;margin-bottom:.2rem;line-height:1.3">Data Analytics with Tableau</div><div style="font-size:.75rem;color:var(--muted);font-family:var(--mono)">Naan Mudhalvan · Jul 2023</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="reveal">
+    <span class="section-label">08 — Contact</span>
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="section-line"></div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <a href="tel:+918072353835" class="contact-card">
+          <div class="contact-card-icon"><i class="fa-solid fa-phone"></i></div>
+          <div>
+            <div class="contact-card-label">Phone</div>
+            <div class="contact-card-value">+91 80723 53835</div>
+          </div>
+        </a>
+        <a href="mailto:nivashini.j123@gmail.com" class="contact-card">
+          <div class="contact-card-icon"><i class="fa-regular fa-envelope"></i></div>
+          <div>
+            <div class="contact-card-label">Email</div>
+            <div class="contact-card-value">nivashini.j123@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/nivashini-j/" target="_blank" class="contact-card">
+          <div class="contact-card-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+          <div>
+            <div class="contact-card-label">LinkedIn</div>
+            <div class="contact-card-value">@Nivashini Jayaraj</div>
+          </div>
+        </a>
+        <a href="https://github.com/nivashinijayaraj" target="_blank" class="contact-card">
+          <div class="contact-card-icon"><i class="fa-brands fa-github"></i></div>
+          <div>
+            <div class="contact-card-label">GitHub</div>
+            <div class="contact-card-value">nivashinijayaraj</div>
+          </div>
+        </a>
+      </div>
+      <div class="contact-cta">
+        <h3>Let's build something great</h3>
+        <p>Currently working as a Data Analyst at VDart and actively seeking opportunities in <strong style="color:var(--accent)">Data Science</strong> and <strong style="color:var(--accent)">AI/ML</strong>. Open to full-time roles, collaborations, and exciting projects. Let's connect!</p>
+        <a href="mailto:nivashini.j123@gmail.com" class="btn btn-primary"><i class="fa-regular fa-envelope"></i> Send a Message</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Nivashini <span>J</span></div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-copy">© 2025 Nivashini Jayaraj</div>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Theme toggle
+const themeBtn = document.getElementById('themeBtn');
+themeBtn.addEventListener('click', () => {
+  document.body.classList.toggle('light');
+  const icon = themeBtn.querySelector('i');
+  icon.className = document.body.classList.contains('light') ? 'fa-regular fa-moon' : 'fa-regular fa-sun';
+});
+
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  hamburger.querySelector('i').className = navLinks.classList.contains('open') ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  navLinks.classList.remove('open');
+  hamburger.querySelector('i').className = 'fa-solid fa-bars';
+}));
+
+// Active nav on scroll
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  sections.forEach(s => {
+    if(scrollY >= s.offsetTop - 100) {
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.style.color = '';
+        if(a.getAttribute('href') === '#'+s.id) a.style.color = 'var(--accent)';
+      });
+    }
+  });
+});
+</script>
+</body>
+</html>
